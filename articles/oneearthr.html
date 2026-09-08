@@ -135,12 +135,12 @@ into a four-level hierarchy:</p>
 <span>     main <span class="op">=</span> <span class="st">"RESOLVE Ecoregions 2017 (simplified)"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="oneearthr_files/figure-html/ecoregions-1.png" class="r-plt" alt="" width="700"></p>
 <p>For publication-quality boundaries, download the original geometries
-once; they are cached per user. <code>full = TRUE</code> works for all
-four layers — the ecoregions (~150 MB) come from the public RESOLVE
+once; they are cached per user. <code>scale = "large"</code> works for
+all four layers — the ecoregions (~150 MB) come from the public RESOLVE
 bucket, the framework layers from the One Earth shared folders:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">ecoregions_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/oe_layer.html">oe_layer</a></span><span class="op">(</span><span class="st">"ecoregions"</span>, full <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="va">realms_full</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/oe_layer.html">oe_layer</a></span><span class="op">(</span><span class="st">"realms"</span>, full <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">ecoregions_full</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/oe_layer.html">oe_layer</a></span><span class="op">(</span><span class="st">"ecoregions"</span>, scale <span class="op">=</span> <span class="st">"large"</span><span class="op">)</span></span>
+<span><span class="va">realms_full</span>     <span class="op">&lt;-</span> <span class="fu"><a href="../reference/oe_layer.html">oe_layer</a></span><span class="op">(</span><span class="st">"realms"</span>, scale <span class="op">=</span> <span class="st">"large"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="joining-levels">Joining levels<a class="anchor" aria-label="anchor" href="#joining-levels"></a>
@@ -206,12 +206,12 @@ the hierarchy:</p>
 <span><span class="va">bioregions</span><span class="op">[</span><span class="va">bioregions</span><span class="op">$</span><span class="va">name</span> <span class="op">==</span> <span class="st">"Amazon River Estuary"</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt; class       : SpatVector</span></span>
 <span><span class="co">#&gt; geometry    : polygons</span></span>
-<span><span class="co">#&gt; dimensions  : 1, 8  (geometries, attributes)</span></span>
+<span><span class="co">#&gt; dimensions  : 1, 5  (geometries, attributes)</span></span>
 <span><span class="co">#&gt; extent      : -52.92505, -39.61838, -5.311916, 7.097323  (xmin, xmax, ymin, ymax)</span></span>
 <span><span class="co">#&gt; coord. ref. : lon/lat WGS 84 (EPSG:4326)</span></span>
-<span><span class="co">#&gt; names       : bioregions objectid shape_leng shape_area            name biogeographic_~            realm subrealm</span></span>
-<span><span class="co">#&gt; type        :      &lt;chr&gt;    &lt;num&gt;      &lt;num&gt;      &lt;num&gt;           &lt;chr&gt;           &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; values      :       NT16       58   -46.8187   -46.8187 Amazon River E~     Neotropical Southern America Amazonia</span></span></code></pre></div>
+<span><span class="co">#&gt; names       : bioregions                 name biogeographic_realm            realm subrealm</span></span>
+<span><span class="co">#&gt; type        :      &lt;chr&gt;                &lt;chr&gt;               &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;</span></span>
+<span><span class="co">#&gt; values      :       NT16 Amazon River Estuary         Neotropical Southern America Amazonia</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
