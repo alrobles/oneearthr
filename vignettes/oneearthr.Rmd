@@ -1,0 +1,129 @@
+---
+title: "Exploring the One Earth Bioregions Framework"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Exploring the One Earth Bioregions Framework}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>",
+                      fig.width = 7, fig.height = 4, dpi = 100)
+```
+
+```{r setup}
+library(oneearthr)
+library(terra)
+```
+
+The One Earth Bioregions Framework organises the terrestrial realm into a
+four-level hierarchy:
+
+| Level | Features | Function |
+|-------|----------|----------|
+| Realm | 14 | `oe_layer("realms")` |
+| Subrealm | 53 | `oe_layer("subrealms")` |
+| Bioregion | 185 | `oe_layer("bioregions")` |
+| Ecoregion | 847 | `oe_layer("ecoregions")` |
+
+## The layers
+
+```{r realms}
+realms <- oe_layer("realms")
+plot(realms, col = as.factor(realms$biogeorelm), border = "grey40",
+     main = "Biogeographical realms")
+```
+
+```{r subrealms}
+subrealms <- oe_layer("subrealms")
+plot(subrealms, col = as.factor(subrealms$biogeorelm), border = "grey60",
+     main = "Subrealms")
+```
+
+```{r bioregions}
+bioregions <- oe_layer("bioregions")
+plot(bioregions, col = as.factor(substr(bioregions$bioregions, 1, 2)),
+     border = "grey70", main = "Bioregions (coloured by realm prefix)")
+```
+
+```{r ecoregions}
+ecoregions <- oe_layer("ecoregions")   # simplified geometry
+plot(ecoregions, col = as.factor(ecoregions$realm), border = NA,
+     main = "RESOLVE Ecoregions 2017 (simplified)")
+```
+
+For publication-quality boundaries, download the original geometries once;
+they are cached per user. `scale = "large"` works for all four layers — the
+ecoregions (~150 MB) come from the public RESOLVE bucket, the framework
+layers from the One Earth shared folders:
+
+```r
+ecoregions_full <- oe_layer("ecoregions", scale = "large")
+realms_full     <- oe_layer("realms", scale = "large")
+```
+
+## Joining levels
+
+The bioregion layer only carries codes (e.g. `AN03`), so the hierarchy is
+best traversed spatially. A spatial join from ecoregion centroids to the
+coarser levels recovers the full path for any ecoregion:
+
+```{r join}
+pts <- centroids(ecoregions)
+
+sub_of <- terra::relate(pts, subrealms, relation = "intersects")
+sub_idx <- apply(sub_of, 1, function(x) which(x)[1])
+ecoregions$subrealm <- subrealms$subrealm_n[sub_idx]
+
+head(ecoregions[, c("eco_name", "realm", "subrealm")] |> values())
+```
+
+And the reverse — listing every ecoregion inside one subrealm:
+
+```{r filter}
+sa_grass <- ecoregions[ecoregions$subrealm == "South America Grasslands", ]
+plot(sa_grass, col = "darkolivegreen3",
+     main = sprintf("%d ecoregions in South America Grasslands",
+                    nrow(sa_grass)))
+```
+
+### Bioregion names
+
+The bioregion geometry only carries codes; `oe_bioregion_names` maps them
+to names and their position in the hierarchy:
+
+```{r names}
+head(oe_bioregion_names)
+
+bioregions <- merge(bioregions, oe_bioregion_names,
+                    by.x = "bioregions", by.y = "code")
+bioregions[bioregions$name == "Amazon River Estuary", ]
+```
+
+## Attribute reference (ecoregions)
+
+The ecoregion layer keeps the original RESOLVE attributes, including the
+protection-status fields of the framework:
+
+```{r attrs}
+table(ecoregions$nnh_name)
+```
+
+`nnh_name` ("Nature Needs Half" assessment) classifies each ecoregion as
+*Protected*, *Half Protected*, *Nature Could Reach Half Protected*, or
+*Nature Imperiled* — the colour ramps `color`, `color_bio`, `color_nnh`
+ship with the data for reproduction of the official maps:
+
+```{r colors}
+plot(ecoregions, col = ecoregions$color_nnh, border = NA,
+     main = "Ecoregion conservation status (official colours)")
+```
+
+## Data sources
+
+- Dinerstein et al. (2017), *BioScience* 67(6),
+  [doi:10.1093/biosci/bix014](https://doi.org/10.1093/biosci/bix014)
+  (CC-BY 4.0) — ecoregions.
+- One Earth Bioregions Framework 2023, <https://www.oneearth.org> —
+  realms, subrealms, bioregions.
