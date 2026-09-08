@@ -25,6 +25,9 @@ or terra::unwrap() to materialise them."><!-- mathjax --><script src="https://cd
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav"><li>
+  <a href="../articles/oneearthr.html">Get started</a>
+</li>
+<li>
   <a href="../reference/index.html">Reference</a>
 </li>
       </ul><ul class="nav navbar-nav navbar-right"><li>
@@ -65,27 +68,29 @@ or <code><a href="https://rspatial.github.io/terra/reference/wrap.html" class="e
 
     <div id="format">
     <h2>Format</h2>
-    <p>Wrapped <code>SpatVector</code> polygon layers in EPSG:4326.</p><dl><dt>oe_realms</dt>
-<dd><p>14 biogeographical realms (full resolution).</p></dd>
+    <p>Wrapped <code>SpatVector</code> polygon layers in EPSG:4326, simplified to
+keep the package lightweight (use <code>oe_layer(layer, full = TRUE)</code> for the
+original geometries):</p><dl><dt>oe_realms</dt>
+<dd><p>14 biogeographical realms (~0.02 deg tolerance).</p></dd>
 
 <dt>oe_subrealms</dt>
-<dd><p>53 subrealms (full resolution).</p></dd>
+<dd><p>53 subrealms (~0.02 deg).</p></dd>
 
 <dt>oe_bioregions</dt>
 <dd><p>185 bioregions, coded by realm prefix + number
-(full resolution).</p></dd>
+(~0.02 deg).</p></dd>
 
 <dt>oe_ecoregions</dt>
-<dd><p>847 ecoregions from RESOLVE Ecoregions 2017,
-simplified to ~0.05 degree tolerance to keep the package lightweight.
-Use <code>oe_layer("ecoregions", full = TRUE)</code> for the original geometry.</p></dd>
+<dd><p>847 ecoregions from RESOLVE Ecoregions 2017
+(~0.15 deg).</p></dd>
 
 
 </dl></div>
     <div id="source">
     <h2>Source</h2>
-    <p>One Earth Bioregions Framework (2023), <a href="https://www.oneearth.org" class="external-link">https://www.oneearth.org</a>;
-Ecoregions: Dinerstein et al. (2017) <a href="https://doi.org/10.1525/bio.2017.67.6.7" class="external-link">doi:10.1525/bio.2017.67.6.7</a>
+    <p>One Earth Bioregions Framework (2023), <a href="https://www.oneearth.org" class="external-link">https://www.oneearth.org</a>,
+licensed CC BY-NC 4.0 (non-commercial use, cite One Earth);
+Ecoregions: Dinerstein et al. (2017) <a href="https://doi.org/10.1093/biosci/bix014" class="external-link">doi:10.1093/biosci/bix014</a>
 ,
 licensed CC-BY 4.0.</p>
     </div>
