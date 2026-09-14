@@ -58,7 +58,9 @@ oe_layer <- function(layer = c("realms", "subrealms", "bioregions",
   returnclass <- match.arg(returnclass)
 
   v <- if (scale == "small") {
-    terra::unwrap(get(paste0("oe_", layer)))
+    # envir = environment() resolves the lazy-data binding in this package's
+    # namespace even when called via oneearthr::oe_layer() without attach.
+    terra::unwrap(get(paste0("oe_", layer), envir = environment()))
   } else {
     .oe_layer_full(layer)
   }
