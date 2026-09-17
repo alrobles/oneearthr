@@ -1,0 +1,8 @@
+bibentry(
+    bibtype  = "Manual",
+    title    = "oneearthr: Access the One Earth Bioregions Framework Spatial Layers",
+    author   = person("Angel", "Robles"),
+    year     = "2026",
+    note     = "R package version 1.0.0",
+    url      = "https://alrobles.github.io/oneearthr/"
+)

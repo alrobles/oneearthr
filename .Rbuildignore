@@ -4,3 +4,6 @@
 ^\.git$
 ^\.gitignore$
 ^\.devin$
+^.*\.Rproj$
+^\.Rproj\.user$
+^vignettes$
