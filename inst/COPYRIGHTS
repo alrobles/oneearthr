@@ -1,0 +1,11 @@
+Third-party data redistributed by oneearthr under their original licenses:
+
+- RESOLVE Ecoregions 2017 (Dinerstein et al., "An Ecoregion-Based Approach to
+  Protecting Half the Terrestrial Realm", BioScience 67(6), 2017,
+  doi:10.1093/biosci/bix014): licensed CC-BY 4.0.
+- One Earth Bioregions Framework (2023), realms, subrealms and bioregions
+  (<https://www.oneearth.org>): licensed CC BY-NC 4.0 (non-commercial use;
+  cite One Earth).
+
+The package code itself is licensed GPL (>= 3) via the 'License' field in
+DESCRIPTION; the shipped spatial data retain the licenses above.

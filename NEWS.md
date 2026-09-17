@@ -1,3 +1,9 @@
+# oneearthr 1.0.1
+
+* Add inst/COPYRIGHTS with the licenses of the bundled spatial data
+  (RESOLVE Ecoregions 2017 CC-BY 4.0; One Earth Bioregions Framework
+  CC BY-NC 4.0) and a note in the DESCRIPTION.
+
 # oneearthr 1.0.0
 
 * Initial CRAN release.

@@ -1,7 +1,7 @@
 Package: oneearthr
 Type: Package
 Title: Access the One Earth Bioregions Framework Spatial Layers
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: 
     person("Angel", "Robles", , "a.l.robles.fernandez@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-4674-4270"))
@@ -10,6 +10,9 @@ Description: Access the One Earth Bioregions Framework: ecoregions,
     versions of all four layers (topology-preserving simplification,
     0.02–0.15 degree tolerance) for lightweight offline use, and provides
     functions to download the full-resolution geometries on demand.
+    Packaged data are redistributed under their original licenses
+    (RESOLVE Ecoregions 2017, CC-BY 4.0; One Earth Bioregions Framework,
+    CC BY-NC 4.0); see inst/COPYRIGHTS.
 License: GPL (>= 3)
 Encoding: UTF-8
 Language: en-US
